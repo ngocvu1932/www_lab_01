@@ -1,19 +1,19 @@
 package vn.edu.iuh.fit.www_lab_week_01.connect;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Connection {
+public class Connect {
     private static Connection connection;
 
     private static void createConnection() {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             String url = "jdbc:mariadb://localhost:3306/mydb?createDatabaseIfNotExist= true";
-            connection = (Connection) DriverManager.getConnection(url, "root", "sapassword");
+            connection = DriverManager.getConnection(url, "root", "sapassword");
 
         } catch ( Exception e) {
             e.printStackTrace();
-
         }
     }
 
@@ -27,7 +27,7 @@ public class Connection {
     public static void closeConnection() {
         if (connection != null) {
             try {
-     //           connection.
+                connection.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
